@@ -37,10 +37,10 @@
         </div>
         <div x-show="mobileMenuOpen" x-transition class="sm:hidden bg-white border-t">
             <div class="px-2 pt-2 pb-3 space-y-1">
-                <a href="index.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-indigo-600 hover:bg-gray-50">首页</a>
-                <a href="flashcards.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-indigo-600 hover:bg-gray-50">闪卡学习</a>
-                <a href="concepts.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-indigo-600 hover:bg-gray-50">核心概念</a>
-                <a href="unlock.html" class="block px-3 py-2 rounded-md text-base font-medium bg-indigo-600 text-white">解锁全部</a>
+                <a href="index.html" @click="mobileMenuOpen = false" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-indigo-600 hover:bg-gray-50">首页</a>
+                <a href="flashcards.html" @click="mobileMenuOpen = false" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-indigo-600 hover:bg-gray-50">闪卡学习</a>
+                <a href="concepts.html" @click="mobileMenuOpen = false" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-indigo-600 hover:bg-gray-50">核心概念</a>
+                <a href="unlock.html" @click="mobileMenuOpen = false" class="block px-3 py-2 rounded-md text-base font-medium bg-indigo-600 text-white">解锁全部</a>
             </div>
         </div>
     </nav>

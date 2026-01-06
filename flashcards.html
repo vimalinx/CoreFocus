@@ -54,10 +54,10 @@
         </div>
         <div x-show="mobileMenuOpen" x-transition class="sm:hidden bg-white border-t">
             <div class="px-4 py-3 space-y-2">
-                <a href="index.html" class="block text-gray-700 hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium">首页</a>
-                <a href="flashcards.html" class="block text-indigo-600 px-3 py-2 rounded-md text-sm font-medium">闪卡学习</a>
-                <a href="concepts.html" class="block text-gray-700 hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium">核心概念</a>
-                <a href="unlock.html" class="block bg-indigo-600 text-white px-3 py-2 rounded-md text-sm font-medium">解锁全部</a>
+                <a href="index.html" @click="mobileMenuOpen = false" class="block text-gray-700 hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium">首页</a>
+                <a href="flashcards.html" @click="mobileMenuOpen = false" class="block text-indigo-600 px-3 py-2 rounded-md text-sm font-medium">闪卡学习</a>
+                <a href="concepts.html" @click="mobileMenuOpen = false" class="block text-gray-700 hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium">核心概念</a>
+                <a href="unlock.html" @click="mobileMenuOpen = false" class="block bg-indigo-600 text-white px-3 py-2 rounded-md text-sm font-medium">解锁全部</a>
             </div>
         </div>
     </nav>
