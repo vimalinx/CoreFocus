@@ -86,12 +86,25 @@ const conceptsData = [
     { name: "资本主义经济危机", definition: "在资本主义再生产过程中由制度因素引发的周期性生产过剩危机。", chapter: "第八章", features: "生产相对过剩、周期性", formula: "根源于资本主义基本矛盾", significance: "暴露资本主义生产方式的内在矛盾" }
 ];
 
+const validCodes = [
+    '7WMXTCLL', 'Q3Z5FE94', 'NUCB8ZJA', '2SLULANH', '8U832HFC',
+    'A6BK56F5', 'SVJXGGVJ', 'ZASBFKHV', 'JUXWE2CR', 'NKXWW25Z',
+    'YYRQ84RE', 'Q4RWAJY4', 'QDKTXEN2', 'JZA6XLG9', 'FVQTGU3V',
+    '7DJXKHXF', 'YWYMBMTL', 'J59TUYNK', '3MWF34CN', 'JGMTX58R',
+    'CUEUGZH8', '79F3HVK6', 'MQV8M6T9', 'U8QVRPUK', 'AJGJDJRX',
+    'QDP4T5S5', 'AUQX2EZQ', 'BPTRDRLC', '38Z3RSVA', 'B8YED4VE',
+    'P7RF58PY', 'A63M77N4', 'DDJH2GCH', 'FMBCXD3R', '4386X8SN',
+    'EL4PKG5Q', 'KABV637M', '7UDX5BKG', 'DHQUYKCE', 'EKUE5L6Q',
+    'NKHTY99X', '6K4JSJEY', 'RSALRVN6', 'MST2NMVF', '7KZGK2BB',
+    '3HUQ67SU', '966SYJPC', 'GB3FKD6K', '2T7795KX', 'XN295CXJ'
+];
+
 function isUnlocked() {
     return localStorage.getItem('unlocked') === 'true';
 }
 
 function unlock(code) {
-    if (code === 'TEST2024') {
+    if (validCodes.includes(code)) {
         localStorage.setItem('unlocked', 'true');
         return true;
     }
