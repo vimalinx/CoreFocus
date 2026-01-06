@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>核心概念 - 期末突击</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <style>
+        [x-cloak] { display: none !important; }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen" x-data="conceptsApp()">
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <a href="index.html" class="text-xl sm:text-2xl font-bold text-indigo-600">期末突击</a>
+                    <span class="hidden sm:block ml-3 text-gray-500">|</span>
+                    <span class="hidden sm:block ml-3 text-gray-700">核心概念</span>
+                </div>
+                <div class="hidden sm:flex items-center space-x-4">
+                    <a href="index.html" class="text-gray-700 hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium">首页</a>
+                    <a href="flashcards.html" class="text-gray-700 hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium">闪卡学习</a>
+                    <a href="concepts.html" class="text-indigo-600 px-3 py-2 rounded-md text-sm font-medium">核心概念</a>
+                    <a href="unlock.html" class="bg-indigo-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-indigo-700">解锁全部</a>
+                </div>
+                <div class="sm:hidden flex items-center">
+                    <button @click="mobileMenuOpen = !mobileMenuOpen" class="text-gray-700 hover:text-indigo-600 p-2">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path x-show="!mobileMenuOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                            <path x-show="mobileMenuOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div x-show="mobileMenuOpen" x-transition class="sm:hidden bg-white border-t">
+            <div class="px-4 py-3 space-y-2">
+                <a href="index.html" class="block text-gray-700 hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium">首页</a>
+                <a href="flashcards.html" class="block text-gray-700 hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium">闪卡学习</a>
+                <a href="concepts.html" class="block text-indigo-600 px-3 py-2 rounded-md text-sm font-medium">核心概念</a>
+                <a href="unlock.html" class="block bg-indigo-600 text-white px-3 py-2 rounded-md text-sm font-medium">解锁全部</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+        <div class="text-center mb-6 sm:mb-8">
+            <h1 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">核心概念与理论</h1>
+            <p class="text-gray-600 text-sm sm:text-base" x-text="`共 ${totalConcepts} 个核心概念`"></p>
+        </div>
+
+        <div x-show="!isUnlocked" class="bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-6">
+            <div class="flex">
+                <div class="flex-shrink-0">
+                    <svg class="h-5 w-5 text-yellow-400" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
+                    </svg>
+                </div>
+                <div class="ml-3">
+                    <p class="text-sm text-yellow-700">
+                        免费版仅显示前5个核心概念，<a href="unlock.html" class="font-medium underline hover:text-yellow-800">立即解锁全部15个核心概念</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+            <template x-for="(concept, index) in displayedConcepts" :key="index">
+                <div class="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow overflow-hidden">
+                    <div class="bg-gradient-to-r from-indigo-500 to-purple-600 px-4 sm:px-6 py-3 sm:py-4">
+                        <h3 class="text-lg sm:text-xl font-bold text-white" x-text="concept.name"></h3>
+                        <span class="text-indigo-100 text-xs sm:text-sm" x-text="concept.chapter"></span>
+                    </div>
+                    <div class="p-4 sm:p-6">
+                        <div class="mb-4">
+                            <h4 class="text-sm font-semibold text-gray-700 mb-2">定义</h4>
+                            <p class="text-gray-600 text-sm" x-text="concept.definition"></p>
+                        </div>
+                        <div class="mb-4">
+                            <h4 class="text-sm font-semibold text-gray-700 mb-2">关键特征</h4>
+                            <p class="text-gray-600 text-sm" x-text="concept.features"></p>
+                        </div>
+                        <div class="mb-4">
+                            <h4 class="text-sm font-semibold text-gray-700 mb-2">公式/逻辑</h4>
+                            <p class="text-gray-600 text-sm font-mono bg-gray-50 p-2 rounded" x-text="concept.formula"></p>
+                        </div>
+                        <div>
+                            <h4 class="text-sm font-semibold text-gray-700 mb-2">经济意义</h4>
+                            <p class="text-gray-600 text-sm" x-text="concept.significance"></p>
+                        </div>
+                    </div>
+                </div>
+            </template>
+        </div>
+
+        <div x-show="!isUnlocked && displayedConcepts.length < concepts.length" class="mt-8 text-center">
+            <a href="unlock.html" class="inline-block bg-indigo-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-indigo-700 transition-colors">
+                解锁全部 15 个核心概念
+            </a>
+        </div>
+    </main>
+
+    <footer class="bg-gray-800 text-white mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p class="text-gray-400">© 2024 期末突击 - 高效复习，轻松应对期末考试</p>
+        </div>
+    </footer>
+
+    <script src="js/data.js"></script>
+    <script>
+        function conceptsApp() {
+            return {
+                concepts: conceptsData,
+                isUnlocked: isUnlocked(),
+                get totalConcepts() {
+                    return this.concepts.length;
+                },
+                get displayedConcepts() {
+                    return this.isUnlocked ? this.concepts : this.concepts.slice(0, 5);
+                }
+            }
+        }
+    </script>
+</body>
+</html>

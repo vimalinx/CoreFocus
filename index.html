@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>期末突击 - 政治经济学</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <style>
+        [x-cloak] { display: none !important; }
+        .flip-card {
+            perspective: 1000px;
+        }
+        .flip-card-inner {
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+        .flip-card.flipped .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+        .flip-card-front, .flip-card-back {
+            backface-visibility: hidden;
+        }
+        .flip-card-back {
+            transform: rotateY(180deg);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <a href="index.html" class="text-xl sm:text-2xl font-bold text-indigo-600">期末突击</a>
+                    <span class="hidden sm:block ml-3 text-gray-500">|</span>
+                    <span class="hidden sm:block ml-3 text-gray-700">政治经济学</span>
+                </div>
+                <div class="hidden sm:flex items-center space-x-4">
+                    <a href="index.html" class="text-gray-700 hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium">首页</a>
+                    <a href="flashcards.html" class="text-gray-700 hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium">闪卡学习</a>
+                    <a href="concepts.html" class="text-gray-700 hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium">核心概念</a>
+                    <a href="unlock.html" class="bg-indigo-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-indigo-700">解锁全部</a>
+                </div>
+                <div class="sm:hidden flex items-center">
+                    <button @click="mobileMenuOpen = !mobileMenuOpen" class="text-gray-700 hover:text-indigo-600 p-2">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path x-show="!mobileMenuOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                            <path x-show="mobileMenuOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div x-show="mobileMenuOpen" x-transition class="sm:hidden bg-white border-t">
+            <div class="px-4 py-3 space-y-2">
+                <a href="index.html" class="block text-gray-700 hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium">首页</a>
+                <a href="flashcards.html" class="block text-gray-700 hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium">闪卡学习</a>
+                <a href="concepts.html" class="block text-gray-700 hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium">核心概念</a>
+                <a href="unlock.html" class="block bg-indigo-600 text-white px-3 py-2 rounded-md text-sm font-medium">解锁全部</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+        <div class="text-center mb-8 sm:mb-12">
+            <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4">政治经济学期末突击</h1>
+            <p class="text-lg sm:text-xl text-gray-600 mb-6 sm:mb-8">高效复习，轻松应对期末考试</p>
+            <div class="flex flex-wrap justify-center gap-4 sm:gap-6">
+                <div class="bg-white rounded-lg shadow-md p-4 sm:p-6 w-36 sm:w-48">
+                    <div class="text-2xl sm:text-3xl font-bold text-indigo-600">67</div>
+                    <div class="text-sm sm:text-base text-gray-600 mt-2">精选闪卡</div>
+                </div>
+                <div class="bg-white rounded-lg shadow-md p-4 sm:p-6 w-36 sm:w-48">
+                    <div class="text-2xl sm:text-3xl font-bold text-indigo-600">15</div>
+                    <div class="text-sm sm:text-base text-gray-600 mt-2">核心概念</div>
+                </div>
+                <div class="bg-white rounded-lg shadow-md p-4 sm:p-6 w-36 sm:w-48">
+                    <div class="text-2xl sm:text-3xl font-bold text-indigo-600">100%</div>
+                    <div class="text-sm sm:text-base text-gray-600 mt-2">考点覆盖</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 mb-8 sm:mb-12">
+            <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
+                <div class="flex items-center mb-4">
+                    <div class="bg-indigo-100 rounded-full p-3">
+                        <svg class="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold ml-3">闪卡学习</h3>
+                </div>
+                <p class="text-gray-600 mb-4">67个高频考点闪卡，点击翻转查看答案，高效记忆</p>
+                <a href="flashcards.html" class="text-indigo-600 hover:text-indigo-700 font-medium">开始学习 →</a>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
+                <div class="flex items-center mb-4">
+                    <div class="bg-green-100 rounded-full p-3">
+                        <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold ml-3">核心概念</h3>
+                </div>
+                <p class="text-gray-600 mb-4">15个核心概念详细解析，包含定义、特征、公式等</p>
+                <a href="concepts.html" class="text-indigo-600 hover:text-indigo-700 font-medium">查看概念 →</a>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
+                <div class="flex items-center mb-4">
+                    <div class="bg-yellow-100 rounded-full p-3">
+                        <svg class="w-6 h-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold ml-3">重点文档</h3>
+                </div>
+                <p class="text-gray-600 mb-4">完整版重点文档，涵盖所有考试要点</p>
+                <a href="unlock.html" class="text-indigo-600 hover:text-indigo-700 font-medium">解锁下载 →</a>
+            </div>
+        </div>
+
+        <div class="bg-gradient-to-r from-indigo-600 to-purple-600 rounded-lg shadow-lg p-6 sm:p-8 text-white">
+            <div class="flex flex-col items-center text-center">
+                <div class="mb-4 sm:mb-0">
+                    <h2 class="text-xl sm:text-2xl font-bold mb-2">解锁全部内容</h2>
+                    <p class="text-indigo-100 text-sm sm:text-base">获取完整闪卡库、核心概念表和重点文档</p>
+                </div>
+                <a href="unlock.html" class="mt-4 sm:mt-0 bg-white text-indigo-600 px-6 sm:px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+                    立即解锁 ¥9.9
+                </a>
+            </div>
+        </div>
+
+        <div class="mt-8 sm:mt-12 bg-white rounded-lg shadow-md p-6 sm:p-8">
+            <h2 class="text-xl sm:text-2xl font-bold text-gray-900 mb-6">扫码加微信购买</h2>
+            <div class="flex flex-col items-center">
+                <div class="bg-gray-50 rounded-lg p-6 mb-6">
+                    <div class="bg-white p-6 rounded-lg flex justify-center">
+                        <div class="w-48 h-48 sm:w-56 sm:h-56 bg-gray-200 rounded flex items-center justify-center">
+                            <span class="text-gray-500 text-sm sm:text-base">微信二维码</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center space-y-2 mb-6">
+                    <p class="text-gray-700 text-sm sm:text-base font-medium">微信号：your-wechat-id</p>
+                    <p class="text-gray-500 text-xs sm:text-sm">添加后请发送"购买期末突击"即可</p>
+                </div>
+                <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 w-full">
+                    <h4 class="font-semibold text-blue-900 text-sm sm:text-base mb-2">购买流程：</h4>
+                    <ol class="text-blue-800 text-xs sm:text-sm space-y-1 sm:space-y-2 list-decimal list-inside">
+                        <li>扫描上方二维码添加微信</li>
+                        <li>发送"购买期末突击"</li>
+                        <li>支付 ¥9.9 后领取验证码</li>
+                        <li>在解锁页面输入验证码即可</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-gray-800 text-white mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p class="text-gray-400">© 2024 期末突击 - 高效复习，轻松应对期末考试</p>
+        </div>
+    </footer>
+</body>
+</html>

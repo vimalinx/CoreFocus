@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>解锁全部 - 期末突击</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <style>
+        [x-cloak] { display: none !important; }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen" x-data="unlockApp()">
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <a href="index.html" class="text-xl sm:text-2xl font-bold text-indigo-600">期末突击</a>
+                    <span class="hidden sm:block ml-3 text-gray-500">|</span>
+                    <span class="hidden sm:block ml-3 text-gray-700">解锁全部</span>
+                </div>
+                <div class="hidden sm:flex items-center space-x-4">
+                    <a href="index.html" class="text-gray-700 hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium">首页</a>
+                    <a href="flashcards.html" class="text-gray-700 hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium">闪卡学习</a>
+                    <a href="concepts.html" class="text-gray-700 hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium">核心概念</a>
+                    <a href="unlock.html" class="bg-indigo-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-indigo-700">解锁全部</a>
+                </div>
+                <div class="sm:hidden flex items-center">
+                    <button @click="mobileMenuOpen = !mobileMenuOpen" class="text-gray-700 hover:text-indigo-600 p-2">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path x-show="!mobileMenuOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                            <path x-show="mobileMenuOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div x-show="mobileMenuOpen" x-transition class="sm:hidden bg-white border-t">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="index.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-indigo-600 hover:bg-gray-50">首页</a>
+                <a href="flashcards.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-indigo-600 hover:bg-gray-50">闪卡学习</a>
+                <a href="concepts.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-indigo-600 hover:bg-gray-50">核心概念</a>
+                <a href="unlock.html" class="block px-3 py-2 rounded-md text-base font-medium bg-indigo-600 text-white">解锁全部</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div x-show="isUnlocked" class="bg-green-50 border-l-4 border-green-400 p-4 mb-8">
+            <div class="flex">
+                <div class="flex-shrink-0">
+                    <svg class="h-5 w-5 text-green-400" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                    </svg>
+                </div>
+                <div class="ml-3">
+                    <p class="text-sm text-green-700">
+                        恭喜！您已成功解锁全部内容，现在可以访问所有闪卡、核心概念和重点文档。
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center mb-8 sm:mb-12">
+            <h1 class="text-2xl sm:text-4xl font-bold text-gray-900 mb-2 sm:mb-4">解锁全部内容</h1>
+            <p class="text-base sm:text-xl text-gray-600">一次付费，永久使用</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 mb-8 sm:mb-12">
+            <div class="bg-white rounded-lg shadow-lg p-6 sm:p-8 border-2 border-gray-200">
+                <div class="text-center mb-4 sm:mb-6">
+                    <h2 class="text-xl sm:text-2xl font-bold text-gray-900 mb-2">免费版</h2>
+                    <div class="text-3xl sm:text-4xl font-bold text-gray-900">¥0</div>
+                    <p class="text-gray-500 mt-2 text-sm sm:text-base">永久免费</p>
+                </div>
+                <ul class="space-y-2 sm:space-y-3 mb-4 sm:mb-6">
+                    <li class="flex items-center text-gray-600 text-sm sm:text-base">
+                        <svg class="w-4 sm:w-5 h-4 sm:h-5 text-green-500 mr-2 sm:mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                        </svg>
+                        前 10 个闪卡
+                    </li>
+                    <li class="flex items-center text-gray-600 text-sm sm:text-base">
+                        <svg class="w-4 sm:w-5 h-4 sm:h-5 text-green-500 mr-2 sm:mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                        </svg>
+                        前 5 个核心概念
+                    </li>
+                    <li class="flex items-center text-gray-600 text-sm sm:text-base">
+                        <svg class="w-4 sm:w-5 h-4 sm:h-5 text-green-500 mr-2 sm:mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                        </svg>
+                        预览重点文档
+                    </li>
+                    <li class="flex items-center text-gray-400 text-sm sm:text-base">
+                        <svg class="w-4 sm:w-5 h-4 sm:h-5 text-gray-300 mr-2 sm:mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                        </svg>
+                        完整闪卡库
+                    </li>
+                    <li class="flex items-center text-gray-400 text-sm sm:text-base">
+                        <svg class="w-4 sm:w-5 h-4 sm:h-5 text-gray-300 mr-2 sm:mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                        </svg>
+                        完整概念表
+                    </li>
+                    <li class="flex items-center text-gray-400 text-sm sm:text-base">
+                        <svg class="w-4 sm:w-5 h-4 sm:h-5 text-gray-300 mr-2 sm:mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                        </svg>
+                        重点文档下载
+                    </li>
+                </ul>
+                <button class="w-full py-2 sm:py-3 bg-gray-200 text-gray-700 rounded-lg font-semibold cursor-default text-sm sm:text-base">
+                    当前版本
+                </button>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-lg p-6 sm:p-8 border-2 border-indigo-500 relative">
+                <div class="absolute top-0 right-0 bg-indigo-500 text-white px-3 sm:px-4 py-1 rounded-bl-lg text-xs sm:text-sm font-semibold">
+                    推荐
+                </div>
+                <div class="text-center mb-4 sm:mb-6">
+                    <h2 class="text-xl sm:text-2xl font-bold text-gray-900 mb-2">完整版</h2>
+                    <div class="text-3xl sm:text-4xl font-bold text-indigo-600">¥9.9</div>
+                    <p class="text-gray-500 mt-2 text-sm sm:text-base">永久使用</p>
+                </div>
+                <ul class="space-y-2 sm:space-y-3 mb-4 sm:mb-6">
+                    <li class="flex items-center text-gray-600 text-sm sm:text-base">
+                        <svg class="w-4 sm:w-5 h-4 sm:h-5 text-green-500 mr-2 sm:mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                        </svg>
+                        全部 67 个闪卡
+                    </li>
+                    <li class="flex items-center text-gray-600 text-sm sm:text-base">
+                        <svg class="w-4 sm:w-5 h-4 sm:h-5 text-green-500 mr-2 sm:mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                        </svg>
+                        全部 15 个核心概念
+                    </li>
+                    <li class="flex items-center text-gray-600 text-sm sm:text-base">
+                        <svg class="w-4 sm:w-5 h-4 sm:h-5 text-green-500 mr-2 sm:mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                        </svg>
+                        重点文档完整版下载
+                    </li>
+                    <li class="flex items-center text-gray-600 text-sm sm:text-base">
+                        <svg class="w-4 sm:w-5 h-4 sm:h-5 text-green-500 mr-2 sm:mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                        </svg>
+                        思维导图高清版
+                    </li>
+                    <li class="flex items-center text-gray-600 text-sm sm:text-base">
+                        <svg class="w-4 sm:w-5 h-4 sm:h-5 text-green-500 mr-2 sm:mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                        </svg>
+                        永久免费更新
+                    </li>
+                    <li class="flex items-center text-gray-600 text-sm sm:text-base">
+                        <svg class="w-4 sm:w-5 h-4 sm:h-5 text-green-500 mr-2 sm:mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                        </svg>
+                        优先客服支持
+                    </li>
+                </ul>
+                <button @click="showPayment = true" 
+                        x-show="!isUnlocked"
+                        class="w-full py-2 sm:py-3 bg-indigo-600 text-white rounded-lg font-semibold hover:bg-indigo-700 transition-colors text-sm sm:text-base">
+                    立即购买
+                </button>
+                <button x-show="isUnlocked" 
+                        class="w-full py-2 sm:py-3 bg-green-600 text-white rounded-lg font-semibold cursor-default text-sm sm:text-base">
+                    已解锁
+                </button>
+            </div>
+        </div>
+
+        <div x-show="showPayment" x-transition class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+            <div class="bg-white rounded-lg shadow-xl max-w-md w-full mx-auto p-4 sm:p-6 max-h-[90vh] overflow-y-auto">
+                <div class="flex justify-between items-center mb-4 sm:mb-6">
+                    <h3 class="text-lg sm:text-xl font-bold text-gray-900">选择支付方式</h3>
+                    <button @click="showPayment = false" class="text-gray-400 hover:text-gray-600 p-1">
+                        <svg class="w-5 sm:w-6 h-5 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="text-center mb-4 sm:mb-6">
+                    <h3 class="text-lg sm:text-xl font-bold text-gray-900 mb-2">扫码加微信购买</h3>
+                    <p class="text-gray-600 text-xs sm:text-sm">扫描下方二维码添加微信，在对话中完成购买</p>
+                </div>
+
+                <div class="bg-gray-50 rounded-lg p-4 sm:p-6 mb-4 sm:mb-6">
+                    <div class="bg-white p-4 sm:p-6 rounded-lg flex justify-center mb-4">
+                        <div class="w-48 h-48 sm:w-56 sm:h-56 bg-gray-200 rounded flex items-center justify-center">
+                            <span class="text-gray-500 text-sm sm:text-base">微信二维码</span>
+                        </div>
+                    </div>
+                    <div class="text-center space-y-2">
+                        <p class="text-gray-700 text-sm sm:text-base font-medium">微信号：your-wechat-id</p>
+                        <p class="text-gray-500 text-xs sm:text-sm">添加后请发送"购买期末突击"即可</p>
+                    </div>
+                </div>
+
+                <div class="bg-blue-50 border border-blue-200 rounded-lg p-3 sm:p-4 mb-4 sm:mb-6">
+                    <h4 class="font-semibold text-blue-900 text-sm sm:text-base mb-2">购买流程：</h4>
+                    <ol class="text-blue-800 text-xs sm:text-sm space-y-1 sm:space-y-2 list-decimal list-inside">
+                        <li>扫描上方二维码添加微信</li>
+                        <li>发送"购买期末突击"</li>
+                        <li>支付 ¥9.9 后领取验证码</li>
+                        <li>在下方输入验证码解锁全部内容</li>
+                    </ol>
+                </div>
+
+                <div class="space-y-3 sm:space-y-4">
+                    <div>
+                        <label class="block text-xs sm:text-sm font-medium text-gray-700 mb-1 sm:mb-2">输入验证码</label>
+                        <input type="text" 
+                               x-model="code" 
+                               placeholder="请输入验证码"
+                               class="w-full px-3 sm:px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm sm:text-base">
+                    </div>
+                    <button @click="submitCode()" 
+                            :disabled="!code"
+                            class="w-full py-2 sm:py-3 bg-indigo-600 text-white rounded-lg font-semibold hover:bg-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors text-sm sm:text-base">
+                        确认解锁
+                    </button>
+                </div>
+
+                <div x-show="error" x-transition class="mt-3 sm:mt-4 bg-red-50 border-l-4 border-red-400 p-3 sm:p-4">
+                    <p class="text-xs sm:text-sm text-red-700" x-text="error"></p>
+                </div>
+            </div>
+        </div>
+
+        <div x-show="success" x-transition class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+            <div class="bg-white rounded-lg shadow-xl max-w-md w-full mx-4 p-6 text-center">
+                <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <svg class="w-8 h-8 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                    </svg>
+                </div>
+                <h3 class="text-xl font-bold text-gray-900 mb-2">解锁成功！</h3>
+                <p class="text-gray-600 mb-6">您现在可以访问全部内容了</p>
+                <a href="flashcards.html" class="inline-block bg-indigo-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-indigo-700 transition-colors">
+                    开始学习
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-gray-800 text-white mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p class="text-gray-400">© 2024 期末突击 - 高效复习，轻松应对期末考试</p>
+        </div>
+    </footer>
+
+    <script src="js/data.js"></script>
+    <script>
+        function unlockApp() {
+            return {
+                mobileMenuOpen: false,
+                isUnlocked: isUnlocked(),
+                showPayment: false,
+                code: '',
+                error: '',
+                success: false,
+                submitCode() {
+                    if (unlock(this.code)) {
+                        this.isUnlocked = true;
+                        this.showPayment = false;
+                        this.success = true;
+                        setTimeout(() => {
+                            window.location.href = 'flashcards.html';
+                        }, 2000);
+                    } else {
+                        this.error = '验证码错误，请检查后重试';
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+</html>
